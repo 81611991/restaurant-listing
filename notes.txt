@@ -1,0 +1,59 @@
+create a ec2 instance as t2.large with sg codedecodesg 
+login as ec2 user and run
+        sudo yum update
+        sudo yum install -y maven
+        mvn -version
+Install Amazon Corretto JDK 11:
+        sudo yum install java-11-amazon-corretto-headless
+Update the system, install Docker, and configure it to start on system boot:
+
+            sudo yum update -y
+            sudo yum install -y docker
+            sudo service docker start
+            sudo chkconfig docker on 
+
+Download Jenkins repository configuration, install Jenkins, and start it:
+
+            sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+            sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+            sudo yum install jenkins -y
+            sudo systemctl enable jenkins
+            sudo systemctl start jenkins
+
+Install NVM (Node Version Manager) and Node.js version 16:
+
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+            . ~/.nvm/nvm.sh
+            nvm install 16
+        
+
+Install Git:
+
+    sudo yum install -y git
+
+Install Git:
+
+    sudo yum install -y git
+
+Check the status of Jenkins service:
+
+    sudo systemctl status jenkins
+
+Retrieve the initial admin password for Jenkins:
+
+    sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Add Jenkins user to the docker group to grant access:
+
+    sudo usermod -aG docker jenkins
+
+become super user:
+Run SonarQube in Docker container:
+
+    docker run -d -p 9000:9000 --name sonarqube sonarqube
+
+Check the logs of the SonarQube container:
+
+    docker logs -f sonarqube
+squ_2f051c84786ad1a89c3d8e38cb43cb788fc3f4b6
+        
