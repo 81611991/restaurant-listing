@@ -27,7 +27,7 @@ pipeline {
 
     stage('SonarQube Analysis') {
   steps {
-    sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=http://35.180.137.8:9000/ -Dsonar.login=squ_32789bcdadb6e4337e432d6cbc100c2a1a14fde5'
+    sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=http://3.111.213.243:9000/ -Dsonar.login=squ_116ce70138b50209c1e495ec90d1608cc518b513'
   }
 }
 
@@ -35,8 +35,8 @@ pipeline {
    stage('Check code coverage') {
             steps {
                 script {
-                    def token = "squ_32789bcdadb6e4337e432d6cbc100c2a1a14fde5"
-                    def sonarQubeUrl = "http://35.180.137.8:9000/api"
+                    def token = "squ_116ce70138b50209c1e495ec90d1608cc518b513"
+                    def sonarQubeUrl = "http://3.111.213.243:9000/api"
                     def componentKey = "com.codeddecode:restaurantlisting"
                     def coverageThreshold = 80.0
 
@@ -80,7 +80,7 @@ pipeline {
 
     stage('Update Image Tag in GitOps') {
       steps {
-         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:udemy-dev-withK8s-AWS-codedecode/deployment-folder.git']])
+         checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:81611991/deployment-folder.git']])
         script {
        sh '''
           sed -i "s/image:.*/image: codedecode25\\/restaurant-listing-service:${VERSION}/" aws/restaurant-manifest.yml
